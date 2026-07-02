@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "https://flowguard-backend.onrender.com/api/$1"
+    }
+  ]
+}

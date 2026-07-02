@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "${PORT:-5000}:5000"
+    env_file:
+      - ./backend/.env
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+# Note: MongoDB is hosted on Atlas (cloud), not as a Docker service.
+# This keeps the setup simple and avoids local MongoDB configuration.
+# Set MONGO_URI in backend/.env to your Atlas connection string.
